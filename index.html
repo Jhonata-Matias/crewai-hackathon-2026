@@ -342,18 +342,18 @@
 const EVENT_DATE = '2026-06-13';
 
 const SCHEDULE = [
-  { time:'09:00', title:'Abertura', desc:'Boas-vindas, formação das equipes e briefing da missão.' },
-  { time:'10:00', title:'Spec Driven Development, AIOX e CrewAI', desc:'Bloco técnico de fundamentos.', items:[
+  { time:'08:00', title:'Abertura', desc:'Boas-vindas, formação das equipes e briefing da missão.' },
+  { time:'09:00', title:'Spec Driven Development, AIOX e CrewAI', desc:'Bloco técnico de fundamentos.', items:[
       'Explicar fundamentos de agentes de IA',
       'Explicar a estrutura do CrewAI',
       'Apresentar a apostila do CrewAI'
   ]},
   { time:'11:00', title:'Apresentação de projetos e tira-dúvidas', desc:'Cada equipe apresenta sua proposta e alinha dúvidas antes da execução.' },
   { time:'12:00', title:'Almoço', desc:'Pausa para reabastecer o exército.' },
-  { time:'13:00', title:'Execução', desc:'Quatro horas de construção. Crews em campo.' },
-  { time:'17:00', title:'Apuração dos resultados', desc:'Avaliação dos projetos entregues.' },
-  { time:'17:30', title:'Divulgação dos resultados', desc:'Anúncio das equipes vencedoras.' },
-  { time:'18:00', title:'Encerramento', desc:'Considerações finais e próximos passos.' }
+  { time:'13:00', title:'Execução', desc:'Duas horas de construção. Crews em campo.' },
+  { time:'15:00', title:'Apuração dos resultados', desc:'Avaliação dos projetos entregues.' },
+  { time:'15:30', title:'Divulgação dos resultados', desc:'Anúncio das equipes vencedoras.' },
+  { time:'16:00', title:'Encerramento', desc:'Considerações finais e próximos passos.' }
 ];
 
 /* ── Timeline ── */
@@ -387,7 +387,7 @@ const stageDate = t => {
   const [hh, mm] = t.split(':').map(Number);
   return new Date(y, m - 1, d, hh, mm, 0);
 };
-const END = stageDate('18:00');
+const END = stageDate('16:00');
 
 function fmtDelta(ms){
   const s = Math.max(0, Math.floor(ms / 1000));
@@ -419,15 +419,15 @@ function tick(){
   if (current === -1){
     lbl.textContent = 'Status da missão';
     sNow.textContent = 'Aguardando abertura';
-    sNext.innerHTML = 'Primeira etapa: <strong>Abertura · 9h</strong>';
+    sNext.innerHTML = 'Primeira etapa: <strong>Abertura · 8h</strong>';
     cdLbl.textContent = 'Início em';
-    cd.textContent = fmtDelta(stageDate('09:00') - now);
+    cd.textContent = fmtDelta(stageDate('08:00') - now);
   } else if (now >= END){
     lbl.textContent = 'Status da missão';
     sNow.textContent = 'Missão cumprida';
     sNext.innerHTML = 'Hackathon encerrado. <strong>Obrigado, exército.</strong>';
     cdLbl.textContent = 'Encerrado às';
-    cd.textContent = '18h00';
+    cd.textContent = '16h00';
   } else {
     lbl.textContent = 'Etapa atual';
     sNow.textContent = SCHEDULE[current].title;
@@ -438,7 +438,7 @@ function tick(){
     } else {
       sNext.innerHTML = 'Última etapa do dia.';
       cdLbl.textContent = 'Encerramento';
-      cd.textContent = '18h00';
+      cd.textContent = '16h00';
     }
   }
 
